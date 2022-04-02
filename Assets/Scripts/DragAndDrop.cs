@@ -20,7 +20,7 @@ public class DragAndDrop : MonoBehaviour
         if (Input.GetMouseButtonDown (0)) {
             RaycastHit hitInfo;
             target = GetClickedObject (out hitInfo);
-            if (target != null) {
+            if (target != null && target.GetComponent<Moveable>()!=null) {
                 _mouseState = true;
                 screenSpace = Camera.main.WorldToScreenPoint (target.transform.position);
                 offset = target.transform.position - Camera.main.ScreenToWorldPoint (new Vector3 (Input.mousePosition.x, Input.mousePosition.y, screenSpace.z));
