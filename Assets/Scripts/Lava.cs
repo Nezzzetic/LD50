@@ -7,8 +7,9 @@ public class Lava : MonoBehaviour
     public float Speed => _getSpeed();
     public float DefaultSpeed;
     public float SlowSpeed;
-    public Vector3 Direction;
+    public OneDirectionMovement Movement;
     public int IntersecCount;
+    public List<Moveable> Intersec;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,28 +17,41 @@ public class Lava : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        _updatePosition();
-    }
 
-    void _updatePosition()
+    void _updateSpeed()
     {
-        transform.position += Direction * Speed*Time.deltaTime;
+        Movement.Speed = _getSpeed();
     }
     
     float _getSpeed()
     {
-        if (IntersecCount > 0) return SlowSpeed;
+        if (Intersec.Count > 0) return SlowSpeed;
         return DefaultSpeed;
     }
 
     void OnTriggerEnter(Collider other)
     {
-        IntersecCount++;
+        var mov = other.GetComponent<Moveable>();
+        if (mov != null) _consumeObjectStart(mov);
+        
     }
     void OnTriggerExit(Collider other)
     {
-        IntersecCount--;
+        var mov = other.GetComponent<Moveable>();
+        if (mov != null && Intersec.Contains(mov)) _consumeObjectEnd(mov);
+    }
+
+    void _consumeObjectStart(Moveable obj)
+    {
+        Intersec.Add(obj);
+        obj.OnLavaAction();
+        _updateSpeed();
+    }
+    
+    void _consumeObjectEnd(Moveable obj)
+    {
+        Intersec.Remove(obj);
+        obj.OnLavaFinishAction();
+        _updateSpeed();
     }
 }
