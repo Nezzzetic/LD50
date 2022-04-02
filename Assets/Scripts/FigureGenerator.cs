@@ -11,6 +11,7 @@ public class FigureGenerator : MonoBehaviour
     public float[] ZScaleRange = {0 ,0 };
     private Moveable lastBox;
     public Action OnFigureTaken=delegate {  };
+    private int count;
     
     // Start is called before the first frame update
     void Start()
@@ -26,7 +27,7 @@ public class FigureGenerator : MonoBehaviour
 
     public void CreateFigure()
     {
-        var rndBox = UnityEngine.Random.Range(0, BoxPrefab.Length-1);
+        var rndBox = count;
         lastBox = Instantiate(BoxPrefab[rndBox], SpawnLoc.position, Quaternion.identity);
         lastBox.FirstUsed += OnFigureTaken;
         if (lastBox.ID!="star") {
@@ -37,7 +38,8 @@ public class FigureGenerator : MonoBehaviour
             lastBox.transform.localScale=new Vector3(rx,1,rz);
             lastBox.transform.Rotate(new Vector3(0,rr,0));
         }
-        
+        count++;
+        if (count == BoxPrefab.Length) count = 0;
     }
 
     public void DisableFigure()

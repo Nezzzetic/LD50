@@ -13,6 +13,7 @@ public class GenerateButton : MonoBehaviour
     private bool active;
     public FigureGenerator FigureGenerator;
     public GameObject ActiveGraphics;
+    public GameObject ActiveGraphics2;
     
     // Start is called before the first frame update
     void Awake()
@@ -33,6 +34,7 @@ public class GenerateButton : MonoBehaviour
             {
                 active = true;
                 ActiveGraphics.SetActive(true);
+                ActiveGraphics2.SetActive(false);
                 if (create || takecd) {
                     FigureGenerator.CreateFigure();
                     create = false;
@@ -48,6 +50,7 @@ public class GenerateButton : MonoBehaviour
         active = false;
         timer = CreateCD;
         ActiveGraphics.SetActive(false);
+        ActiveGraphics2.SetActive(true);
         create = true;
         FigureGenerator.DisableFigure();
     }
@@ -57,6 +60,7 @@ public class GenerateButton : MonoBehaviour
         timer = TakeCD;
         active = false;
         ActiveGraphics.SetActive(false);
+        ActiveGraphics2.SetActive(true);
         takecd = true;
     }
 
