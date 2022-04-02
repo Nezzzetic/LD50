@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     public float Speed;
     public float RotSpeed;
+    public float GrabTransform;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,7 +18,20 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.UpArrow)) transform.position += transform.forward * Speed*Time.deltaTime;
         if (Input.GetKey(KeyCode.DownArrow)) transform.position -= transform.forward * Speed*Time.deltaTime;
-        if (Input.GetKey(KeyCode.LeftArrow)) transform.Rotate(new Vector3(0,RotSpeed*Time.deltaTime,0));
-        if (Input.GetKey(KeyCode.RightArrow)) transform.Rotate(new Vector3(0,-RotSpeed*Time.deltaTime,0));
+        if (Input.GetKey(KeyCode.LeftArrow)) transform.Rotate(new Vector3(0,-RotSpeed*Time.deltaTime,0));
+        if (Input.GetKey(KeyCode.RightArrow)) transform.Rotate(new Vector3(0,RotSpeed*Time.deltaTime,0));
+    }
+    
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.GetComponent<DamageSource>() != null)
+        {
+            Debug.Log("LOSE");
+        }
+    }
+
+    public void Grab(Transform obj)
+    {
+        
     }
 }
