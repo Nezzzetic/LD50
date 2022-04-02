@@ -18,6 +18,7 @@ public class Moveable : MonoBehaviour
     {
         active = false;
         rb.useGravity = false;
+        //rb.isKinematic = true;
     }
     
     
@@ -41,6 +42,7 @@ public class Moveable : MonoBehaviour
         active = false;
         collected = true;
         rb.useGravity = false;
+        rb.isKinematic = true;
     } 
     
     // Start is called before the first frame update

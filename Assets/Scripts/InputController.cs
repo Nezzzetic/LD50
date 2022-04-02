@@ -24,13 +24,17 @@ public class InputController : MonoBehaviour
             target = GetClickedObject (out hitInfo);
             if (target != null)
             {
-                var mov = target.GetComponent<Moveable>();
-                if ( mov!=null && mov.active)
+                var obj = target.GetComponent<Moveable>();
+                if ( obj!=null)
                 {
-                    mov.Use();
-                    _mouseState = true;
-                    screenSpace = Camera.main.WorldToScreenPoint (target.transform.position);
-                    offset = target.transform.position - Camera.main.ScreenToWorldPoint (new Vector3 (Input.mousePosition.x, Input.mousePosition.y, screenSpace.z));
+                    var mov=obj;
+                    if (mov.active)
+                    {
+                        mov.Use();
+                        _mouseState = true;
+                        screenSpace = Camera.main.WorldToScreenPoint (target.transform.position);
+                        offset = target.transform.position - Camera.main.ScreenToWorldPoint (new Vector3 (Input.mousePosition.x, Input.mousePosition.y, screenSpace.z));
+                    }
                 }
                 if ( target.GetComponent<GenerateButtonView>()!=null)
                 {
