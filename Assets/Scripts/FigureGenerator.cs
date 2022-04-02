@@ -8,7 +8,7 @@ public class FigureGenerator : MonoBehaviour
     public Transform SpawnLoc;
     public float[] XScaleRange = {0 ,0 };
     public float[] ZScaleRange = {0 ,0 };
-
+    private Moveable lastBox;
     
     // Start is called before the first frame update
     void Start()
@@ -24,15 +24,17 @@ public class FigureGenerator : MonoBehaviour
 
     public void CreateFigure()
     {
+        if (lastBox!=null && !lastBox.used) lastBox.gameObject.SetActive(false);
         var rndBox = Random.Range(0, BoxPrefab.Length-1);
-        var box = Instantiate(BoxPrefab[rndBox], SpawnLoc.position, Quaternion.identity);
-        if (box.ID!="star") {
+        lastBox = Instantiate(BoxPrefab[rndBox], SpawnLoc.position, Quaternion.identity);
+        
+        if (lastBox.ID!="star") {
             var rx = Random.Range(XScaleRange[0], XScaleRange[1]);
             var rz = Random.Range(ZScaleRange[0], ZScaleRange[1]);
             var rr = Random.Range(0, 360);
-            box.transform.localScale=new Vector3(rx,1,rz);
-            box.transform.localScale=new Vector3(rx,1,rz);
-            box.transform.Rotate(new Vector3(0,rr,0));
+            lastBox.transform.localScale=new Vector3(rx,1,rz);
+            lastBox.transform.localScale=new Vector3(rx,1,rz);
+            lastBox.transform.Rotate(new Vector3(0,rr,0));
         }
     }
     

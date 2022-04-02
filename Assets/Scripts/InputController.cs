@@ -23,7 +23,7 @@ public class InputController : MonoBehaviour
             RaycastHit hitInfo;
             target = GetClickedObject (out hitInfo);
             if (target != null) {
-                if ( target.GetComponent<Moveable>()!=null)
+                if ( target.GetComponent<Moveable>()!=null && target.GetComponent<Moveable>().active)
                 {
                     if (!target.GetComponent<Moveable>().used)
                     {
