@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class GenerateButton : MonoBehaviour
 {
@@ -14,10 +15,12 @@ public class GenerateButton : MonoBehaviour
     public GameObject ActiveGraphics;
     
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
+        FigureGenerator.OnFigureTaken += RunTakeCD;
         active = true;
         FigureGenerator.CreateFigure();
+        
     }
 
     // Update is called once per frame
@@ -29,7 +32,7 @@ public class GenerateButton : MonoBehaviour
             if (timer <= 0)
             {
                 active = true;
-                ActiveGraphics.SetActive(false);
+                ActiveGraphics.SetActive(true);
                 if (create || takecd) {
                     FigureGenerator.CreateFigure();
                     create = false;
@@ -44,15 +47,16 @@ public class GenerateButton : MonoBehaviour
         if (!active) return;
         active = false;
         timer = CreateCD;
-        ActiveGraphics.SetActive(true);
+        ActiveGraphics.SetActive(false);
         create = true;
+        FigureGenerator.DisableFigure();
     }
     
     public void RunTakeCD()
     {
         timer = TakeCD;
         active = false;
-        ActiveGraphics.SetActive(true);
+        ActiveGraphics.SetActive(false);
         takecd = true;
     }
 

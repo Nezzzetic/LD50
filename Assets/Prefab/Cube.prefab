@@ -127,4 +127,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   active: 1
   used: 0
+  collected: 0
   ID: 
+  GenerateButton: {fileID: 0}
+  rb: {fileID: 4989836976506012155}

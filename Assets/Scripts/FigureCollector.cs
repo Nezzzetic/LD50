@@ -6,6 +6,7 @@ public class FigureCollector : MonoBehaviour
 {
     public bool active;
     public bool collected;
+    public string ID;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,13 +24,13 @@ public class FigureCollector : MonoBehaviour
     {
         if (!active) return;
         var mov = other.GetComponent<Moveable>();
-        if (mov != null && mov.ID=="star" && mov.active) _consumeStart(mov);
+        if (mov != null && mov.ID==ID && mov.active) _consumeStart(mov);
     }
     
     void _consumeStart(Moveable obj)
     {
+        obj.OnCollectorAction();
         obj.transform.position = transform.position;
-        obj.active = false;
         active = false;
         collected = true;
     }

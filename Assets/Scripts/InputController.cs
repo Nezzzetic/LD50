@@ -22,21 +22,19 @@ public class InputController : MonoBehaviour
         if (Input.GetMouseButtonDown (0)) {
             RaycastHit hitInfo;
             target = GetClickedObject (out hitInfo);
-            if (target != null) {
-                if ( target.GetComponent<Moveable>()!=null && target.GetComponent<Moveable>().active)
+            if (target != null)
+            {
+                var mov = target.GetComponent<Moveable>();
+                if ( mov!=null && mov.active)
                 {
-                    if (!target.GetComponent<Moveable>().used)
-                    {
-                        target.GetComponent<Moveable>().used=true;
-                        GenerateButton.RunTakeCD();
-                    }
+                    mov.Use();
                     _mouseState = true;
                     screenSpace = Camera.main.WorldToScreenPoint (target.transform.position);
                     offset = target.transform.position - Camera.main.ScreenToWorldPoint (new Vector3 (Input.mousePosition.x, Input.mousePosition.y, screenSpace.z));
                 }
-                if ( target.GetComponent<GenerateButton>()!=null)
+                if ( target.GetComponent<GenerateButtonView>()!=null)
                 {
-                    target.GetComponent<GenerateButton>().Click();
+                    target.GetComponent<GenerateButtonView>().Click();
                 }
             }
         }
