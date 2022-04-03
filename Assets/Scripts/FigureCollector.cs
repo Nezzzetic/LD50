@@ -7,6 +7,8 @@ public class FigureCollector : MonoBehaviour
     public bool active;
     public bool collected;
     public string ID;
+    public GameObject View;
+    public GameObject CollectFX;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,8 +33,11 @@ public class FigureCollector : MonoBehaviour
     {
         obj.OnCollectorAction();
         obj.transform.position = transform.position;
+        obj.transform.rotation = Quaternion.identity;
         active = false;
         collected = true;
+        View.SetActive(false);
+        CollectFX.SetActive(true);
     }
     
 }

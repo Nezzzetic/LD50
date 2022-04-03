@@ -33,11 +33,13 @@ public class FigureGenerator : MonoBehaviour
         if (lastBox.ID!="star") {
             var rx = UnityEngine.Random.Range(XScaleRange[0], XScaleRange[1]);
             var rz = UnityEngine.Random.Range(ZScaleRange[0], ZScaleRange[1]);
-            var rr = UnityEngine.Random.Range(0, 360);
+            
             lastBox.transform.localScale=new Vector3(rx,1,rz);
             lastBox.transform.localScale=new Vector3(rx,1,rz);
-            lastBox.transform.Rotate(new Vector3(0,rr,0));
+            
         }
+        var rr = UnityEngine.Random.Range(0, 360);
+        lastBox.transform.Rotate(new Vector3(0,rr,0));
         count++;
         if (count == BoxPrefab.Length) count = 0;
     }
