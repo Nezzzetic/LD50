@@ -25,7 +25,6 @@ public class GenerateButton : MonoBehaviour
     {
         FigureGenerator.OnFigureTaken += RunTakeCD;
         active = true;
-        FigureGenerator.CreateFigure();
         ParticleSystem ps = CreateFX.GetComponent<ParticleSystem>();
         ParticleSystem ps2 = CreateFX2.GetComponent<ParticleSystem>();
         em = ps.emission;

@@ -16,19 +16,23 @@ public class LevelController : MonoBehaviour
     public GameObject LostEndScreen;
     public GameObject WinStartScreen;
     public GameObject WinEndScreen;
+    public Moveable[] BoxPrefab;
+    public FigureGenerator FigureGenerator;
     // Start is called before the first frame update
     void Start()
     {
-        
+        FigureGenerator.CreateFigure();
     }
     
     void Awake()
     {
+        FigureGenerator.BoxPrefab = BoxPrefab;
         StartTimer = 1;
         var lose = PlayerPrefs.GetInt("lose",0);
         if (lose==0) WinStartScreen.SetActive(true);
         else
             LostStartScreen.SetActive(true);
+        
     }
 
     // Update is called once per frame

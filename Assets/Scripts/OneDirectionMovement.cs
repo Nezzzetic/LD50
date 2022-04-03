@@ -17,7 +17,7 @@ public class OneDirectionMovement : MonoBehaviour
 
     void Update()
     {
-        if (_inLimit())
+        //if (_inLimit())
         _updatePosition();
     }
 
