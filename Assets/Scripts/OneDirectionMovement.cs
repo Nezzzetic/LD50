@@ -9,6 +9,8 @@ public class OneDirectionMovement : MonoBehaviour
     public Vector3 LimitMin;
     public Vector3 LimitMax;
     public float Speed;
+
+    public Transform[] bonusMove;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +26,10 @@ public class OneDirectionMovement : MonoBehaviour
     void _updatePosition()
     {
         transform.position += Direction * Speed*Time.deltaTime;
+        foreach (var mov in bonusMove)
+        {
+            mov.position += Direction * Speed*Time.deltaTime;
+        }
     }
     
     bool  _inLimit()
