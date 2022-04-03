@@ -7,6 +7,8 @@ public class Lava : MonoBehaviour
     public float Speed => _getSpeed();
     public float DefaultSpeed;
     public float SlowSpeed;
+    public float LostSpeed;
+    public bool lost;
     public OneDirectionMovement Movement;
     public InputController InputController;
     public int IntersecCount;
@@ -15,6 +17,7 @@ public class Lava : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        lost = false;
         _updateSpeed();
     }
 
@@ -27,6 +30,7 @@ public class Lava : MonoBehaviour
     
     float _getSpeed()
     {
+        if (lost) return LostSpeed;
         if (Intersec.Count > 0) return SlowSpeed;
         return DefaultSpeed;
     }
@@ -35,6 +39,12 @@ public class Lava : MonoBehaviour
     {
         var mov = other.GetComponent<Moveable>();
         if (mov != null) _consumeObjectStart(mov);
+        var lose = other.GetComponent<LoseTrigger>();
+        if (lose != null)
+        {
+            lose.lost=true;
+            lost = true;
+        }
         
     }
     void OnTriggerExit(Collider other)
