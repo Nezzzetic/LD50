@@ -65,8 +65,8 @@
      <Compile Include="Assets\Scripts\FigureGenerator.cs" />
      <Compile Include="Assets\Scripts\Moveable.cs" />
      <Compile Include="Assets\Scripts\GenerateButtonView.cs" />
-     <Compile Include="Assets\Scripts\FigureCollector.cs" />
      <Compile Include="Assets\Scripts\LoseTrigger.cs" />
+     <Compile Include="Assets\Scripts\FigureCollector.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />

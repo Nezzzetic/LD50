@@ -18,6 +18,7 @@ public class LevelController : MonoBehaviour
     public GameObject WinEndScreen;
     public Moveable[] BoxPrefab;
     public FigureGenerator FigureGenerator;
+    public GameObject LevelDoor;
     // Start is called before the first frame update
     void Start()
     {
@@ -44,6 +45,7 @@ public class LevelController : MonoBehaviour
             PlayerPrefs.SetInt("lose",0);
             WinEndScreen.SetActive(true);
             win = true;
+            LevelDoor.SetActive(false);
         }
         
         if (_checkLose() && !lost && !win)

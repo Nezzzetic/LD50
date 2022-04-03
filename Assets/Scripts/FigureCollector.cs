@@ -9,6 +9,8 @@ public class FigureCollector : MonoBehaviour
     public string ID;
     public GameObject View;
     public GameObject CollectFX;
+    public GameObject Rope;
+    public GameObject RopeFX;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,6 +40,8 @@ public class FigureCollector : MonoBehaviour
         collected = true;
         View.SetActive(false);
         CollectFX.SetActive(true);
+        RopeFX.SetActive(true);
+        Rope.SetActive(false);
     }
     
 }
