@@ -17,7 +17,7 @@ public class Moveable : MonoBehaviour
     public void OnLavaAction()
     {
         active = false;
-        rb.useGravity = false;
+        //rb.useGravity = false;
         //rb.isKinematic = true;
     }
     

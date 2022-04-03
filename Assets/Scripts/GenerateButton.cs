@@ -14,6 +14,7 @@ public class GenerateButton : MonoBehaviour
     public FigureGenerator FigureGenerator;
     public GameObject ActiveGraphics;
     public GameObject ActiveGraphics2;
+    public AudioSource ClickSound;
     
     // Start is called before the first frame update
     void Awake()
@@ -53,6 +54,7 @@ public class GenerateButton : MonoBehaviour
         ActiveGraphics2.SetActive(true);
         create = true;
         FigureGenerator.DisableFigure();
+        ClickSound.Play();
     }
     
     public void RunTakeCD()

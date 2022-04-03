@@ -8,8 +8,10 @@ public class Lava : MonoBehaviour
     public float DefaultSpeed;
     public float SlowSpeed;
     public OneDirectionMovement Movement;
+    public InputController InputController;
     public int IntersecCount;
     public List<Moveable> Intersec;
+    public bool Slow=>Intersec.Count > 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -43,6 +45,7 @@ public class Lava : MonoBehaviour
 
     void _consumeObjectStart(Moveable obj)
     {
+        InputController.DropObj();
         Intersec.Add(obj);
         obj.OnLavaAction();
         _updateSpeed();

@@ -8,7 +8,12 @@ public class InputController : MonoBehaviour
     private GameObject target;
     public Vector3 screenSpace;
     public Vector3 offset;
+    public Vector2 xLimit=new Vector2(0,100);
+    public Vector2 zLimit=new Vector2(0,100);
     public GenerateButton GenerateButton;
+    public AudioSource TakeSound;
+    public AudioSource DropSound;
+    private bool hasObj = false;
 
     // Use this for initialization
     void Start ()
@@ -34,6 +39,8 @@ public class InputController : MonoBehaviour
                         _mouseState = true;
                         screenSpace = Camera.main.WorldToScreenPoint (target.transform.position);
                         offset = target.transform.position - Camera.main.ScreenToWorldPoint (new Vector3 (Input.mousePosition.x, Input.mousePosition.y, screenSpace.z));
+                        TakeSound.Play();
+                        hasObj = true;
                     }
                 }
                 if ( target.GetComponent<GenerateButtonView>()!=null)
@@ -44,11 +51,25 @@ public class InputController : MonoBehaviour
         }
         if (Input.GetMouseButtonUp (0)) {
             _mouseState = false;
+            if (hasObj)
+            {
+                hasObj = false;            
+                DropSound.Play();
+            }
+            if (target.GetComponent<Rigidbody>()!=null)
+                target.GetComponent<Rigidbody>().velocity = Vector3.down*1f;
         }
         if (_mouseState) {
             var curScreenSpace = new Vector3 (Input.mousePosition.x, Input.mousePosition.y, screenSpace.z);
             var curPosition = Camera.main.ScreenToWorldPoint (curScreenSpace) + offset;
-            target.transform.position = new Vector3(curPosition.x,2,curPosition.z);;
+            var x = curPosition.x;
+            var z = curPosition.z;
+            if (curPosition.x < xLimit.x) x = xLimit.x;
+            if (curPosition.x > xLimit.y) x = xLimit.y;
+            if (curPosition.z < zLimit.x) z = zLimit.x;
+            if (curPosition.z > zLimit.y) z = zLimit.y;
+            target.transform.position = new Vector3(x, 2, z);
+
         }
     }
 
@@ -61,5 +82,17 @@ public class InputController : MonoBehaviour
             target = hit.collider.gameObject;
         }
         return target;
+    }
+
+    public void DropObj()
+    {
+        _mouseState = false;
+        if (hasObj)
+        {
+            hasObj = false;            
+            DropSound.Play();
+        }
+        if (target!=null && target.GetComponent<Rigidbody>()!=null)
+            target.GetComponent<Rigidbody>().velocity = Vector3.down*2f;
     }
 }
