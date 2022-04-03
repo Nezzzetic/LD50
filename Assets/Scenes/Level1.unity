@@ -1618,11 +1618,11 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 8ab83c20a3d236c4287bacd7812f9857, type: 2}
     - target: {fileID: 3737095508766841986, guid: f7e666e26ec38b1408436f2ef0a64832, type: 3}
       propertyPath: SlowSpeed
-      value: 0.05
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 3737095508766841986, guid: f7e666e26ec38b1408436f2ef0a64832, type: 3}
       propertyPath: DefaultSpeed
-      value: 0.25
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3737095508766841986, guid: f7e666e26ec38b1408436f2ef0a64832, type: 3}
       propertyPath: InputController
